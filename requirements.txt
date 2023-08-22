@@ -1,0 +1,6 @@
+validators==0.20.0
+tld==0.13
+sentence-transformers==2.2.2
+PublicSuffixList==0.9.3
+faiss-cpu==1.7.3
+pytest==7.3.1

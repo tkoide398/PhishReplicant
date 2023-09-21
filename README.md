@@ -68,6 +68,26 @@ Fine-tune the SBERT model to improve the accuracy.
     python train.py --triplet /path/to/triplet-data.tsv
     ```
 
+## How PhishReplicant Works
+PhishReplicant consists of two main components:
+
+1. **Step 1 (Sec 3.1) - PRCluster:** This component extracts similar domain names through clustering based on embedding vectors obtained from known phishing feeds, such as PhishTank. It also analyzes each cluster's domain names, generating matching rules in terms of top-level domains, effective second-level domains, and domain name length.
+
+2. **Step 2 (Sec 3.2) - PRDetector:** Using the extracted domain names from Step 1, PRDetector class identifies potentially malicious domain names among newly registered domains, like those found in CT Logs. It calculates similarity scores using SBERT embeddings and further cross-references them with matching rules to flag potential phishing threats.
+
+In the evaluation experiments of Section 4.1, we evaluate the clustering results of PRCluster. In Section 4.2, we evaluate PhishReplicant as a whole, using both PRCluster and PRDetector. In Section 5, we perform a detailed analysis of phishing domain names extracted from known phishing feeds using PRCluster and those detected from newly registered domain names using PRDetector.
+
+For more details, refer to the full paper.
+
+## Other Tools
+We provide additional tools used in our experiments, each with detailed information in their respective README files:
+
+- `tools/phishtank`: Downloads known phishing domain names from PhishTank, used for training the model in Section 3.3 and experiments in Section 4 and 5.
+- `tools/ctlog`: Downloads newly registered domain names from CT logs, used for experiments in Section 4 and 5.
+- `tools/editdistance`: Calculates the edit distance between two domain names, employed in experiments in Section 5.3.
+
+
+
 ## Reference
 Please consider citing our paper:
 ```

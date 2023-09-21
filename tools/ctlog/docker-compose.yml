@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb:/data/db
+    command: --wiredTigerCacheSizeGB=0.5
+
+  ctlog:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: ctlog
+    volumes:
+      - ./:/root
+    working_dir: /root
+    command: python download_ctlog.py
+    depends_on:
+      - mongo
+    restart: always

@@ -21,10 +21,10 @@ def save_domain_to_mongodb(domain):
 def bulk_insert_domains_to_mongodb(domains):
     existing_domains = collection.find({"domain": {"$in": domains}})
     existing_domains = set([d['domain'] for d in existing_domains])
-    print(existing_domains)
     new_domains = list(set(domains) - existing_domains)
     if new_domains:
         items = [{"domain": domain, "datetime": datetime.datetime.now(datetime.timezone.utc)} for domain in new_domains]
+        print(items)
         collection.insert_many(items)
 
 

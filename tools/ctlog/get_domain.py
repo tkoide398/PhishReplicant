@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta, date, timezone
 from pymongo import MongoClient
 import os
 
@@ -22,7 +22,7 @@ def extract_and_write_domains_to_file():
     ensure_data_directory_exists()
     today_filename = get_today_filename()
     with open(today_filename, 'w') as file:
-        now = datetime.now()
+        now = datetime.now(timezone.utc)
         twenty_four_hours_ago = now - timedelta(hours=24)
         cursor = collection.find({"datetime": {"$gte": twenty_four_hours_ago, "$lt": now}})
         for document in cursor:

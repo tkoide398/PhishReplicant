@@ -4,3 +4,4 @@ sentence-transformers==2.2.2
 PublicSuffixList==0.9.3
 faiss-cpu==1.7.3
 pytest==7.3.1
+python-Levenshtein==0.21.1
